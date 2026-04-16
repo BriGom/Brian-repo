@@ -1,0 +1,40 @@
+/* 1. CONTENEDOR PRINCIPAL */
+interfaces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 30px;
+    background-color: #000000;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 2. LA TARJETA (CADA INTERFAZ) */
+interfaz {
+    display: block;
+    width: 260px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-top: 6px solid #ccc;
+    transition: transform 0.2s;
+}
+
+/* 3. COLORES ESPECÍFICOS POR TIPO */
+interfaz[tipo="ethernet"] { border-top-color: #f39c12; }
+interfaz[tipo="wifi"] { border-top-color: #4b6987; }
+interfaz[tipo="loopback"] { border-top-color: #16a085; }
+
+/* 4. FORMATO DE LAS ETIQUETAS HIJAS */
+nombre, direccion_ip, mascara, estado, puerta_enlace {
+    display: block;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* 5. AÑADIR LOS TÍTULOS A CADA VALOR */
+nombre::before { content: "Nombre: "; font-weight: bold; color: #666; }
+direccion_ip::before { content: "IP: "; font-weight: bold; color: #666; }
+mascara::before { content: "Máscara: "; font-weight: bold; color: #666; }
+estado::before { content: "Estado: "; font-weight: bold; color: #666; }
+puerta_enlace::before { content: "Gateway: "; font-weight: bold; color: #666; }
