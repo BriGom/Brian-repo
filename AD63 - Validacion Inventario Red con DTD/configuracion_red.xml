@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuracion_red SYSTEM "configuracion_red.dtd">
+<?xml-stylesheet href="styles.css" type="text/css"?>
+
+<configuracion_red>
+
+    <interfaces>
+        <interfaz tipo="ethernet">
+            <nombre>eth0</nombre>
+            <direccion_ip>192.168.10.50</direccion_ip>
+            <mascara>255.255.255.0</mascara>
+            <estado>up</estado>
+            <puerta_enlace>192.168.10.1</puerta_enlace>
+        </interfaz>
+
+        <interfaz tipo="wifi">
+            <nombre>wlan0</nombre>
+            <direccion_ip>10.0.0.15</direccion_ip>
+            <mascara>255.255.255.0</mascara>
+            <estado>down</estado>
+            <puerta_enlace></puerta_enlace>
+        </interfaz>
+
+        <interfaz tipo="loopback">
+            <nombre>lo0</nombre>
+            <direccion_ip>127.0.0.1</direccion_ip>
+            <mascara>255.0.0.0</mascara>
+            <estado>up</estado>
+            <puerta_enlace></puerta_enlace>
+        </interfaz>
+    </interfaces>
+
+    <!-- Sirve para detectar un evento, ya sea de error o un simple aviso, en caso de que haya uno se muestra en pantalla. Usamos el CDATA para añadir los carácteres especiales-->
+<registro_eventos>
+    <evento nivel="error" revisado="no">
+        <interfaz_afectada>eth0</interfaz_afectada>
+        <fecha>2026-03-27</fecha>
+        <mensaje_tecnico><![CDATA[ 
+            if ["$ip" = ""]; then echo "<b>Error de red</b>";fi
+            ]]> </mensaje_tecnico>
+    </evento>
+    <evento nivel="warning" revisado="no">
+        <interfaz_afectada>wlan0</interfaz_afectada>
+        <fecha>2026-03-27</fecha>
+        <mensaje_tecnico><![CDATA[ 
+            <alerta>Señal de antena < 20%</alerta>
+            ]]> </mensaje_tecnico>
+    </evento>
+</registro_eventos>
+</configuracion_red>

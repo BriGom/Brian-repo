@@ -1,0 +1,17 @@
+<!ELEMENT configuracion_red (interfaces, registro_eventos?)>
+<!ELEMENT interfaces (interfaz+)>
+<!ELEMENT interfaz (nombre, direccion_ip, mascara, estado, puerta_enlace?)>
+<!ATTLIST interfaz tipo CDATA #REQUIRED>
+<!ELEMENT registro_eventos (evento*)>
+<!ELEMENT evento (interfaz_afectada, fecha, mensaje_tecnico)>
+<!ATTLIST evento 
+        nivel (error | warning | info) #REQUIRED
+        revisado (si | no) "no">
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT direccion_ip (#PCDATA)>
+<!ELEMENT mascara (#PCDATA)>
+<!ELEMENT estado (#PCDATA)>
+<!ELEMENT puerta_enlace (#PCDATA)>
+<!ELEMENT interfaz_afectada (#PCDATA)>
+<!ELEMENT fecha (#PCDATA)>
+<!ELEMENT mensaje_tecnico (#PCDATA)>

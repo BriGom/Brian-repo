@@ -1,0 +1,109 @@
+/* 1. CONTENEDOR PRINCIPAL */
+configuracion_red,interfaces, registro_eventos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 30px;
+    background-color: #000000;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 2. LA TARJETA (CADA INTERFAZ) */
+interfaz {
+    display: block;
+    width: 260px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-top: 6px solid #ccc;
+    transition: transform 0.2s;
+}
+
+/* 3. COLORES ESPECÍFICOS POR TIPO Y NIVEL*/
+interfaz[tipo="ethernet"] { border-top-color: #f39c12; }
+interfaz[tipo="wifi"] { border-top-color: #4b6987; }
+interfaz[tipo="loopback"] { border-top-color: #16a085; }
+evento[nivel="error"] { border-top-color: red; }
+evento[nivel="warning"] { border-top-color: #f39c12; }
+evento[nivel="error"]::before { color: #e74c3c; font-weight: bold; }
+evento[nivel="warning"]::before { color: #f39c12; font-weight: bold; }
+
+/* 4. FORMATO DE LAS ETIQUETAS HIJAS */
+nombre, direccion_ip, mascara, estado, puerta_enlace {
+    display: block;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* 5. AÑADIR LOS TÍTULOS A CADA VALOR */
+nombre::before { content: "Nombre: "; font-weight: bold; color: #666; }
+direccion_ip::before { content: "IP: "; font-weight: bold; color: #666; }
+mascara::before { content: "Máscara: "; font-weight: bold; color: #666; }
+estado::before { content: "Estado: "; font-weight: bold; color: #666; }
+puerta_enlace::before { content: "Gateway: "; font-weight: bold; color: #666; }
+interfaz_afectada::before { content: "Interfaz: "; font-weight: bold; color: #666; }
+fecha::before { content: "Fecha: "; font-weight: bold; color: #666  ; }
+mensaje_tecnico::before { content: "Mensaje: "; font-weight: bold; color: #666; }
+
+
+evento {
+    display: block;
+    width: 540px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-top: 6px solid #ccc;
+    transition: transform 0.2s;
+}
+evento::before {
+    content: attr(nivel);
+    display: inline-block;
+    font-weight: bold;
+    color: #fff;
+    background-color: #333;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+
+/* 1. Hacemos que los hijos de 'evento' ocupen toda la línea */
+interfaz_afectada, fecha, mensaje_tecnico {
+    display: block; /* Esto crea el salto de línea automático */
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* 2. Estilo especial para el mensaje técnico */
+mensaje_tecnico {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 12px;
+    font-family: 'Courier New', monospace; /* Fuente de código */
+    white-space: pre-wrap; /* Para que respete los saltos de línea del CDATA */
+    border-left: 3px solid #ccc;
+    color: #333;
+}
+
+mensaje_tecnico::before {
+    content: "CÓDIGO / LOG:";
+    display: block;
+    font-weight: bold;
+    font-size: 11px;
+    color: #95a5a6;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+/* 3. Corregimos el fondo del contenedor principal */
+configuracion_red {
+    display: flex;
+    flex-direction: column; /* Para que 'interfaces' esté arriba y 'registro_eventos' abajo */
+    background-color: #000000;
+    min-height: 100vh;
+}
